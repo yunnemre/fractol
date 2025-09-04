@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "fractol.h": "c",
+        "xkblib.h": "c",
+        "xlib.h": "c",
+        "keysymdef.h": "c",
+        "mlx.h": "c",
+        "xshm.h": "c",
+        "shm.h": "c"
+    }
+}
