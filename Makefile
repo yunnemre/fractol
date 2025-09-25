@@ -3,7 +3,10 @@ CFLAGS  =
 RM      = rm -rf
 
 SRCS    = main.c \
-		  helper.c \
+		  init.c \
+		  math_utils.c \
+		  render.c \
+		  window_utils.c
 
 		  
 OBJS    = $(SRCS:.c=.o)

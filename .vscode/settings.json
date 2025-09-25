@@ -6,6 +6,16 @@
         "keysymdef.h": "c",
         "mlx.h": "c",
         "xshm.h": "c",
-        "shm.h": "c"
+        "shm.h": "c",
+        "stdlib.h": "c",
+        "mlx_int.h": "c",
+        "xutil.h": "c",
+        "unistd.h": "c",
+        "mman.h": "c",
+        "xkbstr.h": "c",
+        "stdio.h": "c",
+        "ipc.h": "c",
+        "ap_keysym.h": "c",
+        "keysym.h": "c"
     }
 }
