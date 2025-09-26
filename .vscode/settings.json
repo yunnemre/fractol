@@ -16,6 +16,8 @@
         "stdio.h": "c",
         "ipc.h": "c",
         "ap_keysym.h": "c",
-        "keysym.h": "c"
+        "keysym.h": "c",
+        "cmath": "c",
+        "libft.h": "c"
     }
 }

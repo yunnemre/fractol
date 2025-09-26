@@ -6,8 +6,8 @@ SRCS    = main.c \
 		  init.c \
 		  math_utils.c \
 		  render.c \
-		  window_utils.c
-
+		  window_utils.c \
+		  ft_err_man.c \
 		  
 OBJS    = $(SRCS:.c=.o)
 
