@@ -5,49 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 21:25:50 by ydinler           #+#    #+#             */
-/*   Updated: 2025/09/26 15:32:29 by ydinler          ###   ########.fr       */
+/*   Created: 2025/09/28 02:35:44 by ydinler           #+#    #+#             */
+/*   Updated: 2025/09/29 02:46:25 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
-#include "minilibx-linux/mlx.h"
-#include "libft/libft.h"
-
-static double	ft_atodbl(const char *nptr)
-{
-	long	integer_part;
-	double	fractional_part;
-	double	pow;
-	int		sign;
-
-	integer_part = 0.0;
-	fractional_part = 0.0;
-	sign = 1;
-	pow = 1.0;
-	while (*nptr && (*nptr == ' ' || (9 <= *nptr && *nptr <= 13)))
-		nptr++;
-	while (*nptr == '-' || *nptr == '+')
-		if (*nptr++ == '-')
-			sign *= -1;
-	while (*nptr != '.' && *nptr)
-		integer_part = integer_part * 10 + (*nptr++ - '0');
-	if ('.' == *nptr)
-		++nptr;
-	while (*nptr && ft_isdigit(*nptr))
-	{
-		fractional_part = fractional_part * 10 + (*nptr++ - '0');
-		pow *= 10;
-	}
-	return (sign * (integer_part + fractional_part / pow));
-}
+#include "fract.h"
 
 int	main(int argc, char **argv)
 {
 	t_fractal	fract;
 
-	if (2 == argc && !ft_strncmp(argv[1], "mandelbrot", 10)
-		|| 4 == argc && !ft_strncmp(argv[1], "julia", 5))
+	if ((2 == argc && !ft_strncmp(argv[1], "mandelbrot", 10))
+		|| (4 == argc && !ft_strncmp(argv[1], "julia", 5)))
 	{
 		fract.name = argv[1];
 		if (!ft_strncmp(argv[1], "julia", 5))
@@ -57,12 +27,15 @@ int	main(int argc, char **argv)
 			fract.julia_x = ft_atodbl(argv[2]);
 			fract.julia_y = ft_atodbl(argv[3]);
 		}
-		fractal_init(&fract);
+		win_init(&fract);
+		
 		render(&fract);
 		mlx_hook(fract.win, 17, 0, close_sig, &fract);
 		mlx_hook(fract.win, 4, 1L << 2, mouse_sig, &fract);
-		mlx_hook(fract.win, 6, 1L << 6, motion_sig, &fract);
+		//mlx_hook(fract.win, 6, 1L << 6, motion_sig, &fract);
 		mlx_key_hook(fract.win, esc_input, &fract);
+		//mlx_loop_hook(fract.mlx, render, &fract);
+		
 		mlx_loop(fract.mlx);
 	}
 	else

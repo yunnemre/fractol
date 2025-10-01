@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 21:26:38 by ydinler           #+#    #+#             */
-/*   Updated: 2025/09/26 15:56:21 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/01 01:37:44 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include <stdio.h> //DEBUGG
 # include <stdlib.h>
 # include <unistd.h>
-# include <math.h> // kulanılmadı
 # include "minilibx-linux/mlx.h"
 # include "X11/keysym.h"
 # include "X11/X.h"
+# include "libft/libft.h"
 
 # define WIDHT	800
 # define HEIGHT	800
@@ -52,14 +52,14 @@ typedef struct s_complex
 	double	y;
 }	t_complex;
 
-// typedef struct s_range
-// {
-// 	double	new_min;
-// 	double	new_max;
-// 	double	old_min;
-// 	double	old_max;
+typedef struct s_range
+{
+	double	new_min;
+	double	new_max;
+	double	old_min;
+	double	old_max;
 	
-// }	t_range;
+}	t_range;
 
 typedef struct s_img
 {
@@ -76,13 +76,23 @@ typedef struct s_fractal
 	void	*mlx;
 	void	*win;
 	t_img	img;
+	int     *palette;
+	
 	double	escape_val;
 	int		iterations_def;
+	int		exp_def;
 	double	shift_x;
 	double	shift_y;
+	double	exp_sht_x;
+	double	exp_sht_y;
 	double	zoom;
+	double	exp_zoom;
 	double	julia_x;
 	double	julia_y;
+	int		mutex_val;
+	
+	
+
 }	t_fractal;
 
 int			close_sig(t_fractal *data);
@@ -90,15 +100,34 @@ int			esc_input(int key, t_fractal *data);
 int			mouse_sig(int button, int x, int y, t_fractal *data);
 int			motion_sig(int x, int y, t_fractal *data);
 
-void		render(t_fractal *data);
 void		fractal_init(t_fractal *data);
 
-//double	map(double unscaled_num, t_range range);
+//render
+void		render(t_fractal *data);
+void		my_pixel_put(int x, int y, t_img *img, int color);
+void		handle_pixel(int x, int y, t_fractal *data);;
+
+
+///math.c
+//double		map(double unscaled_num, t_range range);
 double		map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
 t_complex	sum_complex(t_complex z1, t_complex z2);
 t_complex	square_complex(t_complex z);
+int			julia(double zx, double zy, int max_iter, double cx, double cy);
+int			mandelbrot(double cx, double cy, int max_iter);
 
+//ERR_manage.c
 void		ft_err_man(void);
 int			ft_isvalid_double(const char *s);
+void		malloc_error(void);
 
+//CREATE_PALLETTE
+int	*create_pallette(int max_iter);
+int create_rgb(int r, int g, int b);
+
+//shıtf fract.c
+void	shift_right(t_fractal *data, int shift_pixels);
+void	shift_left(t_fractal *data, int shift_pixels);
+void	shift_up(t_fractal *data, int shift_pixels);
+void	shift_down(t_fractal *data, int shift_pixels);
 #endif

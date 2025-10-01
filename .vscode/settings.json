@@ -18,6 +18,9 @@
         "ap_keysym.h": "c",
         "keysym.h": "c",
         "cmath": "c",
-        "libft.h": "c"
-    }
+        "libft.h": "c",
+        "fract.h": "c",
+        "math.h": "c"
+    },
+    "C_Cpp.dimInactiveRegions": false
 }

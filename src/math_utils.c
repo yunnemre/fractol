@@ -6,11 +6,11 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 03:41:52 by ydinler           #+#    #+#             */
-/*   Updated: 2025/09/26 15:58:07 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/09/30 02:54:11 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../fractol.h"
 // double	map(double unscaled_num, t_range range)
 // {
 // 	return (
@@ -42,4 +42,41 @@ t_complex	square_complex(t_complex z)
 	// pıw kulanıla bilir ancak chat yavas kacar diyor
 	res.y = 2 * z.x * z.y;
 	return (res);
+}
+
+int mandelbrot(double cx, double cy, int max_iter)
+{
+    double	x;
+    double	y;
+    double tmp;
+	int		i;
+	
+	
+	x = 0;
+	y = 0;
+	i = 0;
+    while (x * x + y * y <= 4 && i < max_iter)
+    {
+        tmp = x * x - y * y + cx;
+        y = 2 * x * y + cy;
+        x = tmp;
+        i++;
+    }
+    return i;
+}
+
+int julia(double zx, double zy, int max_iter, double cx, double cy)
+{
+    int		i;
+	double	tmp;
+	
+	i = 0;
+    while (zx * zx + zy * zy <= 4 && i < max_iter)
+    {
+        tmp = zx * zx - zy * zy + cx;
+        zy = 2 * zx * zy + cy;
+        zx = tmp;
+        i++;
+    }
+    return i;
 }

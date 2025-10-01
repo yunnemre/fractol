@@ -6,12 +6,18 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 15:30:19 by ydinler           #+#    #+#             */
-/*   Updated: 2025/09/26 16:00:49 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/09/30 02:40:41 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
-#include "libft/libft.h"
+#include "../fractol.h"
+
+void	malloc_error(void)
+{
+	perror("Problems with Malloc");
+	exit(EXIT_FAILURE);
+}
+
 
 int	ft_isvalid_double(const char *s)
 {

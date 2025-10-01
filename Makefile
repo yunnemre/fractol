@@ -1,20 +1,23 @@
 CC      = cc
-CFLAGS  = 
+CFLAGS  = -Wall -Wextra -Werror
 RM      = rm -rf
 
-SRCS    = main.c \
-		  init.c \
-		  math_utils.c \
-		  render.c \
-		  window_utils.c \
-		  ft_err_man.c \
+
+SRCS    = src/main.c \
+		  src/init.c \
+		  src/math_utils.c \
+		  src/render.c \
+		  src/window_utils.c \
+		  src/ft_err_man.c \
+		  src/fract_shitf.c \
+		  src/create_palete.c \
 		  
 OBJS    = $(SRCS:.c=.o)
 
 NAME    = fractol
 LIBFT_DIR = libft
 LIBFT_A   = $(LIBFT_DIR)/libft.a
-
+INC_DIR  = includes/fractol.h
 MLX_DIR = minilibx-linux/./minilibx-linux
 MLX = $(MLX_DIR)/libmlx.a -L$(MLX_DIR) -lmlx -L/usr/lib -lXext -lX11 -lm
 
