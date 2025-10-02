@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 01:26:00 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/01 02:53:17 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/02 21:46:35 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 static void	data_init(t_fractal *data)
 {
 	data->escape_val = 4;
-	data->iterations_def = 42;
+	data->iterations_def = 40;
 	data->shift_x = 0.0;
 	data->shift_y = 0.0;
 	data->zoom = 1.0;
 	data->palette = create_pallette(420);
+	data->mutex_val = 0;
 }
 
 void	fractal_init(t_fractal *data)

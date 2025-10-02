@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 21:26:38 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/01 01:37:44 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/02 22:08:12 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,22 +77,15 @@ typedef struct s_fractal
 	void	*win;
 	t_img	img;
 	int     *palette;
-	
+
 	double	escape_val;
 	int		iterations_def;
-	int		exp_def;
 	double	shift_x;
 	double	shift_y;
-	double	exp_sht_x;
-	double	exp_sht_y;
 	double	zoom;
-	double	exp_zoom;
 	double	julia_x;
 	double	julia_y;
 	int		mutex_val;
-	
-	
-
 }	t_fractal;
 
 int			close_sig(t_fractal *data);
@@ -105,8 +98,7 @@ void		fractal_init(t_fractal *data);
 //render
 void		render(t_fractal *data);
 void		my_pixel_put(int x, int y, t_img *img, int color);
-void		handle_pixel(int x, int y, t_fractal *data);;
-
+void		handle_pixel(int x, int y, t_fractal *data);
 
 ///math.c
 //double		map(double unscaled_num, t_range range);
@@ -122,8 +114,8 @@ int			ft_isvalid_double(const char *s);
 void		malloc_error(void);
 
 //CREATE_PALLETTE
-int	*create_pallette(int max_iter);
-int create_rgb(int r, int g, int b);
+int		*create_pallette(int max_iter);
+int		create_rgb(int r, int g, int b);
 
 //shıtf fract.c
 void	shift_right(t_fractal *data, int shift_pixels);

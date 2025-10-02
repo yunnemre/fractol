@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 03:35:14 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/01 03:19:08 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/02 22:16:57 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ void	my_pixel_put(int x, int y, t_img *img, int color)
 void	handle_pixel(int x, int y, t_fractal *data)
 {
 	t_complex	z;
-	//t_complex	c;
 	int			i;
-	
+
 	z.x = (map(x, -2, +2, 0, WIDHT) * data->zoom) + data->shift_x;
 	z.y = (map(y, +2, -2, 0, HEIGHT) * data->zoom) + data->shift_y;
 	if (!ft_strncmp(data->name, "julia", 5))
@@ -33,10 +32,9 @@ void	handle_pixel(int x, int y, t_fractal *data)
 	else
 		i = mandelbrot(z.x, z.y, data->iterations_def);
 	if (i == data->iterations_def)
-        my_pixel_put(x, y,&data->img,GREEN);
+        my_pixel_put(x, y,&data->img,WHITE);
     else
-        my_pixel_put(x, y,&data->img,data->palette[i % data->iterations_def]);
-	
+		my_pixel_put(x, y,&data->img,data->palette[i % data->iterations_def]);
 }
 
 void	render(t_fractal *data)

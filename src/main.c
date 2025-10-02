@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 21:25:50 by ydinler           #+#    #+#             */
-/*   Updated: 2025/09/30 04:09:23 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/02 21:47:04 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,12 @@ int	main(int argc, char **argv)
 		}
 		fractal_init(&fract);
 		render(&fract);
+		//render_zoom_stalk(&fract);
 		mlx_hook(fract.win, 17, 0, close_sig, &fract);
 		mlx_hook(fract.win, 4, 1L << 2, mouse_sig, &fract);
 		mlx_hook(fract.win, 6, 1L << 6, motion_sig, &fract);
 		mlx_key_hook(fract.win, esc_input, &fract);
 		//mlx_loop_hook(fract.mlx, render, &fract);
-		//mlx_
-		
 		mlx_loop(fract.mlx);
 	}
 	else

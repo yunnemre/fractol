@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 02:43:25 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/01 02:27:00 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/02 23:01:17 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,26 @@ void	shift_right(t_fractal *data, int shift_pixels)
 			handle_pixel(x, y, data);
 	}
 }
+
+// static void print_all_pixels(t_img *img)
+// {
+// 	int y = -1;
+// 	int x;
+// 	unsigned char *p;
+	
+//     while (++y < HEIGHT)
+//     {
+// 		x = -1;
+//         while ( ++x < WIDHT)
+//         {
+//             p = (unsigned char *)img->pixels_ptr + y * img->line + x * (img->bpp / 8);
+// 			if (p[0] > 0 && p[1])
+// 				printf("%d %d %d %d \n",p[0],p[1],p[2],p[3]);
+//         }
+//     }
+//printf("%f %f",data->shift_x, fractal_shift);
+//print_all_pixels(&data->img);
+// }
 
 void	shift_left(t_fractal *data, int shift_pixels)
 {
