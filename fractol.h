@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 21:26:38 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/02 22:08:12 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/07 01:22:25 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 
 # define WIDHT	800
 # define HEIGHT	800
-# define ERROR_MESSAGE "Please enter \n\t\" ./fractol mandelbrot\" or \n\t\" ./fractol julia  <value_reel> <value_complex> \" "
+# define ERROR_MESSAGE "Please enter \n\t\" ./fractol mandelbrot\" or \n\t\" \
+	./fractol julia  <value_reel> <value_complex> \" "
 
 # define BLACK       0x000000  // Siyah
 # define WHITE       0xFFFFFF  // Beyaz
@@ -46,6 +47,8 @@
 # define GOLD        0xFFD700  // Altın sarısı
 # define SILVER      0xC0C0C0  // Gümüş
 
+# define PALETE_SIZE 512
+
 typedef struct s_complex
 {
 	double	x;
@@ -58,7 +61,6 @@ typedef struct s_range
 	double	new_max;
 	double	old_min;
 	double	old_max;
-	
 }	t_range;
 
 typedef struct s_img
@@ -72,41 +74,49 @@ typedef struct s_img
 
 typedef struct s_fractal
 {
-	char	*name;
-	void	*mlx;
-	void	*win;
-	t_img	img;
-	int     *palette;
-
-	double	escape_val;
-	int		iterations_def;
-	double	shift_x;
-	double	shift_y;
-	double	zoom;
-	double	julia_x;
-	double	julia_y;
-	int		mutex_val;
+	char				*name;
+	void				*mlx;
+	void				*win;
+	t_img				img;
+	int					*palette;
+	struct s_fractal	*jul;
+	t_range				range_x;
+	t_range				range_y;
+	double				escape_val;
+	int					iterations_def;
+	double				shift_x;
+	double				shift_y;
+	double				zoom;
+	double				julia_x;
+	double				julia_y;
+	int					mutex_val;
 }	t_fractal;
 
+// typedef struct s_iter_result
+// {
+//     int iterations;
+//     t_complex z_last;
+// } t_iter_result;
+
+// window_utils.c
 int			close_sig(t_fractal *data);
-int			esc_input(int key, t_fractal *data);
+int			input_sig(int key, t_fractal *data);
 int			mouse_sig(int button, int x, int y, t_fractal *data);
 int			motion_sig(int x, int y, t_fractal *data);
 
-void		fractal_init(t_fractal *data);
+void		data_init(t_fractal *data);
 
-//render
+//render.c
 void		render(t_fractal *data);
 void		my_pixel_put(int x, int y, t_img *img, int color);
 void		handle_pixel(int x, int y, t_fractal *data);
 
 ///math.c
-//double		map(double unscaled_num, t_range range);
-double		map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
+double		map(double unscaled_num, t_range range);
 t_complex	sum_complex(t_complex z1, t_complex z2);
 t_complex	square_complex(t_complex z);
-int			julia(double zx, double zy, int max_iter, double cx, double cy);
-int			mandelbrot(double cx, double cy, int max_iter);
+int			julia(t_complex z, int max_iter, double cx, double cy);
+int			mandelbrot(t_complex c, int max_iter);
 
 //ERR_manage.c
 void		ft_err_man(void);
@@ -114,12 +124,23 @@ int			ft_isvalid_double(const char *s);
 void		malloc_error(void);
 
 //CREATE_PALLETTE
-int		*create_pallette(int max_iter);
-int		create_rgb(int r, int g, int b);
+int			*create_pallette(int max_iter);
+int			create_rgb(int r, int g, int b);
 
 //shıtf fract.c
-void	shift_right(t_fractal *data, int shift_pixels);
-void	shift_left(t_fractal *data, int shift_pixels);
-void	shift_up(t_fractal *data, int shift_pixels);
-void	shift_down(t_fractal *data, int shift_pixels);
+int			shift_man(int key, t_fractal *data);
+
+// julia render and utils 
+int			julia_win_man(int x, int y, t_fractal *data);
+void		julia_win(int x, int y, t_fractal *data);
+void		jul_render(t_fractal *jul);
+void		jul_pixel(int x, int y, t_fractal *jul);
+int			jul_close_sig(t_fractal *data);
+int			jul_input_sig(int key, t_fractal *jul);
+void		draw_crosshair(t_img *img, int x, int y, int color);
+int			jul_mouse_sig(int button, int x, int y, t_fractal *data);
+int			expose_hook(t_fractal *data);
 #endif
+
+// burayı duzenlemyi unutma dosyarar gore fonksiyonalrı 
+//sırala gerkeiz fonksiyonalrı ve defineları kaldır

@@ -11,6 +11,8 @@ SRCS    = src/main.c \
 		  src/ft_err_man.c \
 		  src/fract_shitf.c \
 		  src/create_palete.c \
+		  src/julia_mlx.c \
+		  src/jul_win_utils.c \
 		  
 OBJS    = $(SRCS:.c=.o)
 
