@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_err_man.c                                       :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 15:30:19 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/04 18:55:39 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/13 19:29:43 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fractol.h"
-
-void	malloc_error(void)
-{
-	perror("Problems with Malloc");
-	exit(EXIT_FAILURE);
-}
+#include "fractol.h"
 
 int	ft_isvalid_double(const char *s)
 {
@@ -42,8 +36,30 @@ int	ft_isvalid_double(const char *s)
 	return (1);
 }
 
-void	ft_err_man(void)
+double	ft_atodbl(const char *nptr)
 {
-	ft_putstr_fd(ERROR_MESSAGE, STDERR_FILENO);
-	exit(EXIT_FAILURE);
+	long	integer_part;
+	double	fractional_part;
+	double	pow;
+	int		sign;
+
+	integer_part = 0.0;
+	fractional_part = 0.0;
+	sign = 1;
+	pow = 1.0;
+	while (*nptr && (*nptr == ' ' || (9 <= *nptr && *nptr <= 13)))
+		nptr++;
+	while (*nptr == '-' || *nptr == '+')
+		if (*nptr++ == '-')
+			sign *= -1;
+	while (*nptr != '.' && *nptr)
+		integer_part = integer_part * 10 + (*nptr++ - '0');
+	if ('.' == *nptr)
+		++nptr;
+	while (*nptr && ft_isdigit(*nptr))
+	{
+		fractional_part = fractional_part * 10 + (*nptr++ - '0');
+		pow *= 10;
+	}
+	return (sign * (integer_part + fractional_part / pow));
 }

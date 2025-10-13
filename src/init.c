@@ -6,13 +6,12 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 01:26:00 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/07 01:07:52 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/13 19:10:14 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fractol.h"
-#include "../libft/libft.h"
-#include "../minilibx-linux/mlx.h"
+#include "fractol.h"
+
 
 static void	map_init(t_range *range, int xory)
 {
@@ -38,9 +37,11 @@ static void	fractal_init(t_fractal *data)
 	data->shift_x = 0.0;
 	data->shift_y = 0.0;
 	data->zoom = 1.0;
-	data->palette = create_pallette(512);
+	data->pow = 3;
+	data->palette = create_pallette(PALETE_SIZE);
 	data->mutex_val = 0;
-	if (!ft_strncmp(data->name, "julia", 5))
+	if (!ft_strncmp(data->name, "julia", 5)
+		|| !ft_strncmp(data->name, "multijul", 9))
 		data->mutex_val = 1;
 	map_init(&data->range_x, 1);
 	map_init(&data->range_y, 0);
@@ -72,13 +73,5 @@ void	data_init(t_fractal *data)
 	fractal_init(data);
 }
 
-// static void	map_init(t_range *range)
-// {
-// 	range->min_wd = -2.0;
-// 	range->max_wd = 2.0;
-// 	range->min_hg = -2.0; // veya -1.5
-// 	range->max_hg = 2.0;
-
-// 	range->scale_x = (range->max_wd - range->min_wd) / WIDHT;
-// 	range->scale_y = (range->max_hg - range->min_hg) / HEIGHT;
-// }
+//load_palette_from_file("/home/ynn/fractol/src/colors_palet.txt"
+//, &palettsize); 

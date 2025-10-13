@@ -6,11 +6,11 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 02:43:25 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/07 01:06:24 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/13 19:10:08 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fractol.h"
+#include "fractol.h"
 
 static void	shift_right(t_fractal *data, int shift_pixels)
 {
@@ -20,14 +20,15 @@ static void	shift_right(t_fractal *data, int shift_pixels)
 	double			fractal_shift;
 	unsigned char	*row;
 
-	fractal_shift = shift_pixels * (4.0 / WIDHT) * data->zoom;
+	fractal_shift = shift_pixels * (4.0 / data->range_x.old_max) * data->zoom;
 	data->shift_x -= fractal_shift;
 	shift_bytes = shift_pixels * 4;
 	y = -1;
-	while (++y < HEIGHT)
+	while (++y < (int)(data->range_y.old_max))
 	{
-		row = (unsigned char *)data->img.pixels_ptr + y * WIDHT * 4;
-		x = WIDHT * 4;
+		row = (unsigned char *)data->img.pixels_ptr + y
+			* (int)(data->range_x.old_max) * 4;
+		x = (int)(data->range_x.old_max) * 4;
 		while (--x >= shift_bytes)
 			row[x] = row[x - shift_bytes];
 		x = -1;
@@ -44,18 +45,19 @@ static void	shift_left(t_fractal *data, int shift_pixels)
 	double			fractal_shift;
 	unsigned char	*row;
 
-	fractal_shift = shift_pixels * (4.0 / WIDHT) * data->zoom;
+	fractal_shift = shift_pixels * (4.0 / (data->range_x.old_max)) * data->zoom;
 	data->shift_x += fractal_shift;
 	shift_bytes = shift_pixels * 4;
 	y = -1;
-	while (++y < HEIGHT)
+	while (++y < (int)(data->range_y.old_max))
 	{
-		row = (unsigned char *)data->img.pixels_ptr + y * WIDHT * 4;
+		row = (unsigned char *)data->img.pixels_ptr + y
+			* (int)(data->range_x.old_max) * 4;
 		x = -1;
-		while (++x < WIDHT * 4 - shift_bytes)
+		while (++x < (int)(data->range_x.old_max) * 4 - shift_bytes)
 			row[x] = row[x + shift_bytes];
-		x = WIDHT - shift_pixels - 1;
-		while (++x < WIDHT)
+		x = (int)(data->range_x.old_max) - shift_pixels - 1;
+		while (++x < (int)(data->range_x.old_max))
 			handle_pixel(x, y, data);
 	}
 }
@@ -68,16 +70,18 @@ static void	shift_up(t_fractal *data, int shift_pixels)
 	double			fractal_shift;
 	unsigned char	*row;
 
-	fractal_shift = shift_pixels * (4.0 / HEIGHT) * data->zoom;
+	fractal_shift = shift_pixels * (4.0 / (data->range_y.old_max)) * data->zoom;
 	data->shift_y -= fractal_shift;
-	shift_bytes = shift_pixels * WIDHT * 4;
+	shift_bytes = shift_pixels * (int)(data->range_x.old_max) * 4;
 	row = (unsigned char *)data->img.pixels_ptr;
-	ft_memmove(row, row + shift_bytes, (HEIGHT - shift_pixels) * WIDHT * 4);
-	y = HEIGHT - shift_pixels - 1;
-	while (++y < HEIGHT)
+	ft_memmove(row, row + shift_bytes,
+		((int)(data->range_y.old_max) - shift_pixels)
+		* (int)(data->range_x.old_max) * 4);
+	y = (int)(data->range_y.old_max) - shift_pixels - 1;
+	while (++y < (int)(data->range_y.old_max))
 	{
 		x = -1;
-		while (++x < WIDHT)
+		while (++x < (int)(data->range_x.old_max))
 			handle_pixel(x, y, data);
 	}
 }
@@ -90,16 +94,18 @@ static void	shift_down(t_fractal *data, int shift_pixels)
 	double			fractal_shift;
 	unsigned char	*row;
 
-	fractal_shift = shift_pixels * (4.0 / HEIGHT) * data->zoom;
+	fractal_shift = shift_pixels * (4.0 / (data->range_y.old_max)) * data->zoom;
 	data->shift_y += fractal_shift;
-	shift_bytes = shift_pixels * WIDHT * 4;
+	shift_bytes = shift_pixels * (int)(data->range_x.old_max) * 4;
 	row = (unsigned char *)data->img.pixels_ptr;
-	ft_memmove(row + shift_bytes, row, (HEIGHT - shift_pixels) * WIDHT * 4);
+	ft_memmove(row + shift_bytes, row,
+		((int)(data->range_y.old_max) - shift_pixels)
+		* (int)(data->range_x.old_max) * 4);
 	y = -1;
 	while (++y < shift_pixels)
 	{
 		x = -1;
-		while (++x < WIDHT)
+		while (++x < (int)(data->range_x.old_max))
 			handle_pixel(x, y, data);
 	}
 }

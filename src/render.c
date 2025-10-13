@@ -6,11 +6,11 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 03:35:14 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/07 00:31:47 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/13 19:08:21 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fractol.h"
+#include "fractol.h"
 
 void	my_pixel_put(int x, int y, t_img *img, int color)
 {
@@ -23,18 +23,29 @@ void	my_pixel_put(int x, int y, t_img *img, int color)
 void	handle_pixel(int x, int y, t_fractal *data)
 {
 	t_complex	z;
+	t_complex	j;
 	int			i;
+	int			idx;
 
 	z.x = (map(x, data->range_x) * data->zoom) + data->shift_x;
 	z.y = (map(y, data->range_y) * data->zoom) + data->shift_y;
 	if (!ft_strncmp(data->name, "julia", 5))
 		i = julia(z, data->iterations_def, data->julia_x, data->julia_y);
+	else if (!ft_strncmp(data->name, "multijul", 9))
+	{
+		j.x = data->julia_x;
+		j.y = data->julia_y;
+		i = multi_jul(z, data->iterations_def, j, data->pow);
+	}
+	else if (!ft_strncmp(data->name, "multibrot", 10))
+		i = multibrot(z, data->iterations_def, data->pow);
 	else
 		i = mandelbrot(z, data->iterations_def);
+	idx = (int)((double)i / (double)data->iterations_def * (PALETE_SIZE - 1));
 	if (i == data->iterations_def)
 		my_pixel_put(x, y, &data->img, WHITE);
 	else
-		my_pixel_put(x, y, &data->img, data->palette[i % PALETE_SIZE]);
+		my_pixel_put(x, y, &data->img, data->palette[idx]);
 }
 
 void	render(t_fractal *data)
