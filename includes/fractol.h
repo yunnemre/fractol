@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 21:26:38 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/13 19:32:05 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/15 20:02:22 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,26 @@
 # define GOLD        0xFFD700  // Altın sarısı
 # define SILVER      0xC0C0C0  // Gümüş
 
-# define PALETE_SIZE 2048
+# define PALETE_SIZE 256
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 typedef struct s_rgb
 {
 	double		t;
-	int			r;
-	int			g;
-	int			b;
+	int 		r;
+	int 		g;
+	int 		b;
 }	t_rgb;
+
+typedef struct s_lch
+{
+	double l; // Lightness (0–100)
+	double c; // Chroma (0–100+)
+	double h; // Hue (0–360)
+}	t_lch;
 
 typedef struct s_complex
 {
@@ -137,9 +148,9 @@ int			ft_isvalid_double(const char *s);
 
 //CREATE_PALLETTE
 int			*create_pallette(int max_iter);
-int			create_rgb1(t_rgb rgb);
-int			create_rgb2(t_rgb rgb);
-int			create_rgb3(t_rgb rgb);
+// int			create_rgb1(t_rgb rgb);
+// int			create_rgb2(t_rgb rgb);
+// int			create_rgb3(t_rgb rgb);
 
 //shıtf fract.c
 int			shift_man(int key, t_fractal *data);
@@ -163,6 +174,8 @@ void		malloc_error(void);
 void		start_helper(void);
 void		menu_helper(void);
 
+
+// static int	lch_to_rgb(double L, double C, double H);
 #endif
 
 // burayı duzenlemyi unutma dosyarar gore fonksiyonalrı 

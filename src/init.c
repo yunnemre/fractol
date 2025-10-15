@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 01:26:00 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/13 19:10:14 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/15 18:44:29 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	map_init(t_range *range, int xory)
 static void	fractal_init(t_fractal *data)
 {
 	data->escape_val = 4;
-	data->iterations_def = 40;
+	data->iterations_def = 50;
 	data->shift_x = 0.0;
 	data->shift_y = 0.0;
 	data->zoom = 1.0;

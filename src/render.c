@@ -6,12 +6,15 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 03:35:14 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/13 19:08:21 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/15 18:49:26 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 void	my_pixel_put(int x, int y, t_img *img, int color)
 {
 	int	offset;
@@ -43,7 +46,7 @@ void	handle_pixel(int x, int y, t_fractal *data)
 		i = mandelbrot(z, data->iterations_def);
 	idx = (int)((double)i / (double)data->iterations_def * (PALETE_SIZE - 1));
 	if (i == data->iterations_def)
-		my_pixel_put(x, y, &data->img, WHITE);
+		my_pixel_put(x, y, &data->img, SILVER);
 	else
 		my_pixel_put(x, y, &data->img, data->palette[idx]);
 }
