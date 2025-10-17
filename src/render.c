@@ -6,15 +6,12 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 03:35:14 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/15 18:49:26 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/17 15:29:18 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
 void	my_pixel_put(int x, int y, t_img *img, int color)
 {
 	int	offset;

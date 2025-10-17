@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 00:28:49 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/13 19:10:47 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/17 15:30:02 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ int	input_sig(int key, t_fractal *data)
 	else if (key == XK_Left || key == XK_Right
 		|| key == XK_Down || key == XK_Up)
 		return (shift_man(key, data));
-	else if (key == XK_1)
-		data->iterations_def += 10;
-	else if (key == XK_minus)
-		data->iterations_def -= 10;
+	else if (key == XK_1 || key == XK_minus)
+		iteration_sig(key, data);
 	else if (key == XK_2)
 		return (mutex_convert(data));
 	else if (key == XK_3)
@@ -108,34 +106,6 @@ int	motion_sig(int x, int y, t_fractal *data)
 	}
 	return (0);
 }
-
-// data->julia_x = (map(x, data->range_x) * data->zoom) + data->shift_x;
-// data->julia_y = (map(y, data->range_y) * data->zoom) + data->shift_y;
-// data->name = "julia";
-// data->mutex_val = 1;
-// render(data);
-// if (!ft_strncmp(data->name, "julia", 5))
-// 		{
-// 			data->zoom *= 0.25;
-// 			data->iterations_def += 50;
-// 			render (data);
-// 			return (0);
-// 		}
-// else
-// {
-// 	if (data->mutex_val == 0)
-// 		return 0;
-// }
-// static void	data_copy(t_fractal *data, t_fractal *copy)
-// {
-// 	copy->escape_val=data->escape_val;
-// 	copy->iterations_def = data->iterations_def;
-// 	copy->shift_x = data->shift_x;
-// 	copy->shift_y = data->shift_y;
-// 	copy->zoom = data->zoom;
-// 	copy->palette = data->palette;
-// 	copy->mutex_val = data->mutex_val;
-// }
 
 // julia kasmayı engellem kicin ekranı 8 veya es bir 
 //parcay bolup eger

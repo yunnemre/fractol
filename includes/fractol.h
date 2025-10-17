@@ -6,14 +6,14 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 21:26:38 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/15 20:02:22 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/17 15:26:15 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include <stdio.h> //DEBUGG
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include "mlx.h"
@@ -24,28 +24,14 @@
 # define WIDHT	800
 # define HEIGHT	800
 
-# define BLACK       0x000000  // Siyah
-# define WHITE       0xFFFFFF  // Beyaz
-# define RED         0xFF0000  // Kırmızı
-# define GREEN       0x00FF00  // Yeşil
-# define BLUE        0x0000FF  // Mavi
-# define YELLOW      0xFFFF00  // Sarı
-# define CYAN        0x00FFFF  // Camgöbeği
-# define MAGENTA     0xFF00FF  // Eflatun
-# define GRAY        0x808080  // Gri
-# define ORANGE      0xFFA500  // Turuncu
-# define PURPLE      0x800080  // Mor
-# define BROWN       0x8B4513  // Kahverengi
-# define PINK        0xFFC0CB  // Pembe
-# define LIGHT_GRAY  0xD3D3D3  // Açık gri
-# define DARK_GRAY   0x404040  // Koyu gri
-# define NAVY        0x000080  // Lacivert
-# define TEAL        0x008080  // Camgöbeği koyu
-# define OLIVE       0x808000  // Zeytin yeşili
-# define GOLD        0xFFD700  // Altın sarısı
-# define SILVER      0xC0C0C0  // Gümüş
+# define BLACK       0x000000
+# define WHITE       0xFFFFFF
+# define RED         0xFF0000
+# define GREEN       0x00FF00
+# define BLUE        0x0000FF
+# define SILVER      0xC0C0C0
 
-# define PALETE_SIZE 256
+# define PALETE_SIZE 512
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -58,13 +44,6 @@ typedef struct s_rgb
 	int 		g;
 	int 		b;
 }	t_rgb;
-
-typedef struct s_lch
-{
-	double l; // Lightness (0–100)
-	double c; // Chroma (0–100+)
-	double h; // Hue (0–360)
-}	t_lch;
 
 typedef struct s_complex
 {
@@ -120,6 +99,7 @@ int			expose_hook(t_fractal *data);
 // windpw_utils.c
 int			mutex_convert(t_fractal *data);
 void		bonus_sig(int key, t_fractal *data);
+void		iteration_sig(int key, t_fractal *data);
 
 // init.c
 void		data_init(t_fractal *data);
@@ -148,9 +128,6 @@ int			ft_isvalid_double(const char *s);
 
 //CREATE_PALLETTE
 int			*create_pallette(int max_iter);
-// int			create_rgb1(t_rgb rgb);
-// int			create_rgb2(t_rgb rgb);
-// int			create_rgb3(t_rgb rgb);
 
 //shıtf fract.c
 int			shift_man(int key, t_fractal *data);
@@ -174,17 +151,4 @@ void		malloc_error(void);
 void		start_helper(void);
 void		menu_helper(void);
 
-
-// static int	lch_to_rgb(double L, double C, double H);
 #endif
-
-// burayı duzenlemyi unutma dosyarar gore fonksiyonalrı 
-//sırala gerkeiz fonksiyonalrı ve defineları kaldır
-// typedef struct s_iter_result
-// {
-//     int iterations;
-//     t_complex z_last;
-// } t_iter_result;
-// int *load_palette_from_file(const char *filename, int *size);
-// t_complex	sum_complex(t_complex z1, t_complex z2);
-// t_complex	square_complex(t_complex z);

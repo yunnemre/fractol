@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 02:43:25 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/13 19:10:08 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/17 15:19:13 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,25 +124,6 @@ int	shift_man(int key, t_fractal *data)
 	return (0);
 }
 
-//mlx_do_sync(data->mlx); bana yavas geldi ama test edilcek
-// static void print_all_pixels(t_img *img)
-// {
-// 	int y = -1;
-// 	int x;
-// 	unsigned char *p;	
-//     while (++y < HEIGHT)
-//     {
-// 		x = -1;
-//         while ( ++x < WIDHT)
-//         {
-//p = (unsigned char *)img->pixels_ptr + y * img->line + x * (img->bpp / 8);
-// 			if (p[0] > 0 && p[1])
-// 				printf("%d %d %d %d \n",p[0],p[1],p[2],p[3]);
-//         }
-//     }
-//printf("%f %f",data->shift_x, fractal_shift);
-//print_all_pixels(&data->img);
-// }
 // [********] her bir yıldız * bir piksel belirtigini sayarsak benim img ptr 
 //bunu char *addr olrak soyle ututyormus bir piksel icin bahsediyorum 
 // [********] rgba degeri oluyor int 4 byte lik bir alan kapsıyor bu alnı 

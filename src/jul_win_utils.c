@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 18:11:29 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/13 19:10:21 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/17 15:23:20 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	jul_input_sig(int key, t_fractal *jul)
 		jul->shift_x = 0.0;
 		jul->shift_y = 0.0;
 		jul->zoom = 1.0;
-		jul->iterations_def = 150;
+		jul->iterations_def = 50;
 	}
 	jul_render(jul);
 	return (0);
@@ -79,7 +79,8 @@ int	jul_mouse_sig(int button, int x, int y, t_fractal *jul)
 	else if (button == Button3)
 	{
 		jul->zoom *= 0.25;
-		jul->iterations_def += 50;
+		if (jul->iterations_def <= PALETE_SIZE - 50)
+			jul->iterations_def += 50;
 	}
 	else if (button == Button2)
 		jul->zoom *= 2.5;

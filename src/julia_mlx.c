@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 15:39:25 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/13 19:10:26 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/17 15:28:08 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	jul_init(t_fractal *jul, t_fractal *data)
 	else
 		jul->name = "julia";
 	jul->mlx = data->mlx;
-	jul->win = mlx_new_window(jul->mlx, WIDHT / 2, HEIGHT / 2, "Julia");
+	jul->win = mlx_new_window(jul->mlx, WIDHT / 2, HEIGHT / 2, data->name);
 	jul->img.img_ptr = mlx_new_image(jul->mlx, WIDHT / 2, HEIGHT / 2);
 	jul->img.pixels_ptr = mlx_get_data_addr(jul->img.img_ptr, &jul->img.bpp,
 			&jul->img.line, &jul->img.endian);
@@ -77,8 +77,7 @@ void	julia_win(int x, int y, t_fractal *data)
 	jul->julia_y = map(y, data->range_y) * data->zoom + data->shift_y;
 	data->jul = jul;
 	jul_render(jul);
-	mlx_hook(jul->win, DestroyNotify, NoEventMask,
-		(int (*)(void *))jul_close_sig, &data->jul);
+	mlx_hook(jul->win, DestroyNotify, NoEventMask, jul_close_sig, &data->jul);
 	mlx_hook(jul->win, ButtonPress, ButtonPressMask, jul_mouse_sig, jul);
 	mlx_hook(jul->win, Expose, ExposureMask, jul_expose, jul);
 	mlx_hook(jul->win, KeyPress, KeyPressMask, jul_input_sig, jul);
@@ -101,24 +100,6 @@ int	julia_win_man(int x, int y, t_fractal *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
 	return (0);
 }
-
 //mlx_hook(jul->win, MotionNotify, PointerMotionMask, jul_motion_sig, jul);
 // mlx_hook(jul->win, FocusIn, NoEventMask, focus_in_handler, jul);
 // mlx_hook(jul->win, FocusOut, NoEventMask, focus_out_handler, jul);
-// void	jul_pixel(int x, int y, t_fractal *jul)
-// {
-// 	t_complex	z;
-// 	int			i;
-
-// 	z.x = (map(x, jul->range_x) * jul->zoom) + jul->shift_x;
-// 	z.y = (map(y, jul->range_y) * jul->zoom) + jul->shift_y;
-// 	i = julia(z, jul->iterations_def, jul->julia_x, jul->julia_y);
-// 	if (i == jul->iterations_def)
-// 		my_pixel_put(x, y, &jul->img, MAGENTA);
-// 	else
-// 		my_pixel_put(x, y, &jul->img, jul->palette[i % PALETE_SIZE]);
-// }
-//mlx_put_image_to_window(jul->mlx, jul->win, jul->img.img_ptr, 0, 0);
-	//mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
-	//mlx_loop(jul->mlx);
-//printf("x%f y%f\n",data->jul->julia_x,data->jul->julia_y);

@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 18:02:42 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/13 19:10:50 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/17 15:05:10 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,19 @@ void	bonus_sig(int key, t_fractal *data)
 			data->pow = (data->pow + 1) % 7;
 		if (data->jul && data->win)
 			data->jul->pow = data->pow;
+	}
+}
+
+void	iteration_sig(int key, t_fractal *data)
+{
+	if (key == XK_1)
+	{
+		if (data->iterations_def <= PALETE_SIZE - 10)
+			data->iterations_def += 10;
+	}
+	else if (key == XK_minus)
+	{
+		if (data->iterations_def >= 10)
+			data->iterations_def -= 10;
 	}
 }
