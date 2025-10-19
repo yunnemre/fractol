@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 18:11:29 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/17 15:23:20 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/19 17:09:38 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,23 +86,6 @@ int	jul_mouse_sig(int button, int x, int y, t_fractal *jul)
 		jul->zoom *= 2.5;
 	jul->shift_x = m.x - f.x * jul->zoom;
 	jul->shift_y = m.y - f.y * jul->zoom;
-	jul_render(jul);
-	return (0);
-}
-
-int	jul_motion_sig(int x, int y, t_fractal *jul)
-{
-	static int	frame = 0;
-
-	if (!jul || !jul->win)
-		return (0);
-	frame++;
-	if (frame % 5 != 0)
-		return (0);
-	if (jul->mutex_val != 0)
-		return (0);
-	jul->julia_x = (map(x, jul->range_x) * jul->zoom) + jul->shift_x;
-	jul->julia_y = (map(y, jul->range_y) * jul->zoom) + jul->shift_y;
 	jul_render(jul);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 21:26:38 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/17 15:26:15 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/19 17:10:07 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ void		draw_crosshair(t_img *img, int x, int y, int color);
 int			jul_close_sig(t_fractal **jul);
 int			jul_input_sig(int key, t_fractal *jul);
 int			jul_mouse_sig(int button, int x, int y, t_fractal *data);
-int			jul_motion_sig(int x, int y, t_fractal *jul);
 int			jul_expose(t_fractal *jul);
 
 //helper.c

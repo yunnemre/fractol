@@ -6,7 +6,7 @@
 /*   By: ydinler <ydinler@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 02:37:58 by ydinler           #+#    #+#             */
-/*   Updated: 2025/10/17 15:19:58 by ydinler          ###   ########.fr       */
+/*   Updated: 2025/10/19 17:13:04 by ydinler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,13 @@ static int	create_rgb3(t_rgb rgb)
 
 static int	create_rgb2(t_rgb rgb)
 {
-	double	s;
-	double	h;
+	double	t;
 
-	s = rgb.t;
-	h = fmod(pow(360.0 * s, 1.5), 360.0);
-	rgb.r = (75.0 - (75.0 * (1 - pow(cos(M_PI * s), 2.0)))) + 1.4749
-		* (28.0 + (75.0 - (75.0 * (1 - pow(cos(M_PI * s), 2.0))))
-			* cos(h * M_PI / 180.0));
-	rgb.g = (75.0 - (75.0 * (1 - pow(cos(M_PI * s), 2.0)))) - 0.2280
-		* (28.0 + (75.0 - (75.0 * (1 - pow(cos(M_PI * s), 2.0))))
-			* cos(h * M_PI / 180.0))
-		- 0.3600 * (28.0 + (75.0 - (75.0 * (1 - pow(cos(M_PI * s), 2.0))))
-			* sin(h * M_PI / 180.0));
-	rgb.b = (75.0 - (75.0 * (1 - pow(cos(M_PI * s), 2.0)))) + 0.0
-		* (28.0 + (75.0 - (75.0 * (1 - pow(cos(M_PI * s), 2.0))))
-			* cos(h * M_PI / 180.0)) + 0.8310
-		* (28.0 + (75.0 - (75.0 * (1 - pow(cos(M_PI * s), 2.0))))
-			* sin(h * M_PI / 180.0));
-	return ((int)rgb.r | ((int)rgb.g << 8) | ((int)rgb.b << 16));
+	t = rgb.t;
+	rgb.r = (double)(9 * (1 - t) * t * t * t * 255);
+	rgb.g = (double)(15 * (1 - t) * (1 - t) * t * t * 255);
+	rgb.b = (double)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255);
+	return (((rgb.r & 0xFF) << 16) | ((rgb.g & 0xFF) << 8) | (rgb.b & 0xFF));
 }
 
 static int	create_rgb1(t_rgb rgb)
